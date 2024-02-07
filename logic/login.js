@@ -1,3 +1,5 @@
 function loginButtonTapped() {
-    // TODO: Access info inside text field and check against authentication db
+    // TODO: Check against authentication db
+    let username = document.getElementById("usernameField").value;
+    let password = document.getElementById("passwordField").value;
 }
