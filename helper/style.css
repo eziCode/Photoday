@@ -42,6 +42,14 @@ nav li:first-child{
     margin-right: auto;
 }
 
+nav ul li:first-child a {
+    user-select: none;
+}
+
+nav ul li:first-child a {
+    background-color: initial;
+}
+
 .sidebar{
     position: fixed;
     top: 0;
