@@ -8,6 +8,13 @@ app.use(cors())
 
 const users = []
 
+/*
+
+RUN SERVER: forever start server.js
+STOP SERVER: forever stop server.js
+
+*/
+
 app.get('/users', (req, res) => {
   res.json(users)
 })
