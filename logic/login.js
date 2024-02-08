@@ -1,5 +1,5 @@
 function loginButtonTapped() {
-    // TODO: Check against authentication db
+    // Check against authentication db
     let username = document.getElementById("usernameField").value;
     let password = document.getElementById("passwordField").value;
 
@@ -8,7 +8,6 @@ function loginButtonTapped() {
         password: password
     };
 
-    //ISSUE HERE
     fetch('http://localhost:3000/users/login', {
         method: 'POST',
         headers: {
