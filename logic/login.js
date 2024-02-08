@@ -7,4 +7,28 @@ function loginButtonTapped() {
         username: username,
         password: password
     };
+
+    //ISSUE HERE
+    fetch('http://localhost:3000/users/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body : JSON.stringify(data)
+    })
+    .then(response => {
+        if(response.ok) {
+            return response.text();
+        } else {
+            throw new Error('Failed to login');
+        }
+    })
+    .then(result =>{
+        if (result.trim() === 'Success') {
+            window.location.href = 'http://127.0.0.1:5500/src/index.html';
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
 }
