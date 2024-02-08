@@ -137,3 +137,50 @@ nav ul li:first-child a {
     margin-top: 10px;
     margin-bottom: 10px;
 }
+
+.account-creation-container {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.account-creation-field {
+    width: 350px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    text-align: center;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    display: flex;
+}
+
+.account-creation-field input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 20px;
+}
+
+.account-creation-field label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.create-account-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

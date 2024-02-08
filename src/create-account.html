@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Archive</title>
+    <title>Create Account</title>
     <link rel="stylesheet" href="/helper/style.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="/logic/create-account.js"></script>
 </head>
 <body>
     <nav>
@@ -26,7 +27,18 @@
         </ul>
     </nav>
 
-    <!---Add fields for user to input information-->
+    <div class="account-creation-container">
+        <div class="account-creation-field">
+            <label for="nameField">Enter your name:</label>
+            <input type="text" id="nameField" name="textfield">
+            <label for="emailField">Enter your email</label>
+            <input type="text" id="emailField" name="textfield">
+            <label for="usernameField">Enter your username:</label>
+            <input type="text" id="usernameField" name="textfield">
+            <label for="passwordField">Enter your password:</label>
+            <input type="text" id="passwordField" name="textfield">
+            <button class="create-account-button" onclick="createAccountButtonTapped()">Create Account</button>
+        </div>
 
     <script>
         function showSidebar() {
