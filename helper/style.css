@@ -96,7 +96,7 @@ nav ul li:first-child a {
     left: 50%;
     top: 50%;
     -webkit-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -40%);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -183,4 +183,28 @@ nav ul li:first-child a {
     cursor: pointer;
     margin-top: 10px;
     margin-bottom: 10px;
+}
+
+.error-message-field {
+    color: red;
+    text-align: center;
+    background-color: rgba(255, 0, 0, 0.1);
+}
+
+.error-message-container {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -240%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid red;
+    border-radius: 5px;
+}
+
+.error-message-field label {
+    display: block;
+    margin: 45px;
 }
