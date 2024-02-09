@@ -201,7 +201,7 @@ nav ul li:first-child a {
     top: 50%;
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -240%);
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
     border: 1px solid red;
