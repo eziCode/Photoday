@@ -147,7 +147,7 @@ nav ul li:first-child a {
     left: 50%;
     top: 50%;
     -webkit-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -36%);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -201,7 +201,7 @@ nav ul li:first-child a {
     top: 50%;
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -240%);
-    display: none;
+    display: flex;
     justify-content: center;
     align-items: center;
     border: 1px solid red;
@@ -215,4 +215,114 @@ nav ul li:first-child a {
 .error-message-field p {
     display: block;
     margin: 45px;
+}
+
+.error-message-field-account-creation p {
+    display: block;
+    margin: 45px;
+}
+
+.error-message-field-account-creation {
+    color: red;
+    text-align: center;
+    background-color: rgba(255, 0, 0, 0.1);
+}
+
+.error-message-container-account-creation {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -510%);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid red;
+    border-radius: 5px;
+    width: auto;
+    max-width: 90%;
+    max-height: 7vh;
+    overflow: auto;
+}
+
+@media(max-height: 550px) {
+    .account-creation-field input {
+        padding: 4px;
+        margin-bottom: 10px;
+    }
+    .account-creation-field label {
+        display: block;
+        margin-bottom: 5px;
+    }
+    .error-message-container-account-creation {
+        transform: translate(-50%, -480%);
+    }
+    .create-account-button {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    .error-message-field p {
+        display: block;
+        margin: 25px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    .error-message-container {
+        position: absolute;
+        transform: translate(-50%, -440%);
+    }
+}
+
+@media(max-height: 475px) {
+    .account-creation-field input {
+        width: 100%;
+        padding: 2px;
+        margin-bottom: 6px;
+    }
+    .account-creation-field label {
+        display: block;
+        margin-bottom: 3px;
+    }
+    .error-message-container-account-creation {
+        transform: translate(-50%, -480%);
+    }
+    .create-account-button {
+        margin-top: 8px;
+        margin-bottom: 8px;
+    }
+    .error-message-container {
+        position: absolute;
+        transform: translate(-50%, -452%);
+    }
+    .error-message-field p {
+        display: block;
+        margin: 10px;
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+}
+
+@media(max-height: 390px) {
+    .account-creation-field input {
+        width: 100%;
+        padding: 1.25px;
+        margin-bottom: 4px;
+    }
+    .account-creation-field label {
+        display: block;
+        margin-bottom: 2px;
+    }
+    .error-message-container-account-creation {
+        transform: translate(-50%, -468%);
+    }
+    .create-account-button {
+        margin-top: 6px;
+        margin-bottom: 6px;
+    }
+    .login-container {
+        transform: translate(-50%, -30%);
+    }
+    .error-message-container {
+        transform: translate(-50%, -400%);
+    }
 }

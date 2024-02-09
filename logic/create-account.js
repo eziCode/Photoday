@@ -1,9 +1,15 @@
 function createAccountButtonTapped() {
+    hideErrorMessage();
     // TODO: Save name and email in database
     let name = document.getElementById('nameField').value;
     let email = document.getElementById('emailField').value;
     let username = document.getElementById('usernameField').value;
     let password = document.getElementById('passwordField').value;
+
+    if (name === '' || email === '' || username === '' || password === '') {
+        showErrorMessage('Please fill in all fields.');
+        return;
+    }
 
     let data = {
         username: username,
@@ -32,4 +38,16 @@ function createAccountButtonTapped() {
     .catch(error => {
         console.error('Error:', error);
     });
+}
+
+function showErrorMessage(message) {
+    let errorMessageContainer = document.getElementById('error-message-container-account-creation');
+    let errorLabel = document.getElementById('error-message-account-creation');
+    errorMessageContainer.style.display = 'flex';
+    errorLabel.textContent = `${message}`;
+}
+
+function hideErrorMessage() {
+    let errorMessageContainer = document.getElementById('error-message-container-account-creation');
+    errorMessageContainer.style.display = 'none';
 }

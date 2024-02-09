@@ -1,8 +1,14 @@
 function loginButtonTapped() {
     hideErrorMessage();
     // Check against authentication db
+
     let username = document.getElementById("usernameField").value;
     let password = document.getElementById("passwordField").value;
+
+    if (username === "" || password === "") {
+        showErrorMessage("Please fill in all fields.");
+        return;
+    }
 
     let data = {
         username: username,
