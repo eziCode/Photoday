@@ -100,6 +100,10 @@ nav ul li:first-child a {
     display: flex;
     justify-content: center;
     align-items: center;
+    width: auto;
+    max-width: 90%;
+    max-height: 80vh;
+    overflow: auto;
 }
 
 .login-field {
@@ -197,14 +201,18 @@ nav ul li:first-child a {
     top: 50%;
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -240%);
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
     border: 1px solid red;
     border-radius: 5px;
+    width: auto;
+    max-width: 90%;
+    max-height: 14vh;
+    overflow: auto;
 }
 
-.error-message-field label {
+.error-message-field p {
     display: block;
     margin: 45px;
 }

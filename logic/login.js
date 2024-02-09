@@ -1,4 +1,5 @@
 function loginButtonTapped() {
+    hideErrorMessage();
     // Check against authentication db
     let username = document.getElementById("usernameField").value;
     let password = document.getElementById("passwordField").value;
@@ -19,15 +20,29 @@ function loginButtonTapped() {
         if(response.ok) {
             return response.text();
         } else {
-            throw new Error('Failed to login');
+            showErrorMessage("Cannot find user. Please try again.");
         }
+        throw new Error('Failed to login');
     })
     .then(result =>{
         if (result.trim() === 'Success') {
             window.location.href = 'http://127.0.0.1:5500/src/index.html';
         }
+        showErrorMessage("Incorrect password. Please try again.");
     })
     .catch(error => {
         console.error('Error:', error);
     });
+}
+
+function showErrorMessage(message) {
+    let errorMessageContainer = document.getElementById("error-message-container");
+    let errorLabel = document.getElementById("error-message");
+    errorMessageContainer.style.display = "flex";
+    errorLabel.textContent = `${message}`;
+}
+
+function hideErrorMessage() {
+    let errorMessageContainer = document.getElementById("error-message-container");
+    errorMessageContainer.style.display = "none";
 }
