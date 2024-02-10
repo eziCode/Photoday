@@ -263,6 +263,31 @@ nav ul li:first-child a {
     transform: translate(-50%, -70%);
 }
 
+.capture-photo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, 200%);
+    width: 150%;
+}
+
+.capture-photo button {
+    width: 10%;
+    padding: 10px;
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
 @media(max-height: 550px) {
     .account-creation-field input {
         padding: 4px;
@@ -292,6 +317,10 @@ nav ul li:first-child a {
     .photo-booth {
         position: absolute;
         transform: translate(-50%, -60%);
+    }
+    .capture-photo {
+        position: absolute;
+        transform: translate(-50%, 250%);
     }
 }
 
