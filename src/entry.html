@@ -26,12 +26,15 @@
         </ul>
     </nav>
 
-    <!--If user is not logged in, stop them from taking -->
+    <!--If user is not logged in, stop them from taking/submitting entry-->
 
-
-    <!--Need image capture window-->
+    <!--Image capture window-->
+    <div class="photo-booth">
+        <video id="video" width="400" height="300" autoplay></video>
+    </div>
     <!--Prompt user to accept camera permissions-->
 
+    <script src="/logic/entry.js"></script>
     <script>
         function showSidebar() {
             const sidebar = document.querySelector('.sidebar')

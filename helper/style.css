@@ -245,6 +245,24 @@ nav ul li:first-child a {
     overflow: auto;
 }
 
+
+.photo-booth {
+    width: 400px;
+    background: #ccc;
+    border: 10px solid #ddd;
+}
+
+.photo-booth {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -70%);
+}
+
 @media(max-height: 550px) {
     .account-creation-field input {
         padding: 4px;
@@ -270,6 +288,10 @@ nav ul li:first-child a {
     .error-message-container {
         position: absolute;
         transform: translate(-50%, -440%);
+    }
+    .photo-booth {
+        position: absolute;
+        transform: translate(-50%, -60%);
     }
 }
 
@@ -300,6 +322,10 @@ nav ul li:first-child a {
         margin-top: 5px;
         margin-bottom: 5px;
     }
+    .photo-booth {
+        position: absolute;
+        transform: translate(-50%, -52%);
+    }
 }
 
 @media(max-height: 390px) {
@@ -324,5 +350,11 @@ nav ul li:first-child a {
     }
     .error-message-container {
         transform: translate(-50%, -400%);
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .photo-booth {
+        display: hide;
     }
 }
