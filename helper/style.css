@@ -272,7 +272,7 @@ nav ul li:first-child a {
     top: 50%;
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, 200%);
-    width: 150%;
+    width: 100%;
 }
 
 .capture-photo button {
@@ -286,6 +286,65 @@ nav ul li:first-child a {
     margin-top: 10px;
     margin-bottom: 10px;
     font-size: 20px;
+}
+
+.sleep-button-group {
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(37%, -50%);
+    width: 100%;
+}
+
+.mood-button-group {
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-47%, -50%);
+    width: 100%;
+}
+
+.sleep-button-group button {
+    background-color: blue;
+    border: 2 solid black;
+    color: white;
+    padding: 12px;
+    border-radius: 5px;
+    border-color: blue;
+    width: 10%;
+    cursor: pointer;
+    display: block;
+    margin-top: 8px;
+}
+
+.sleep-button-group button:hover {
+    background-color: white;
+    color: blue;
+}
+
+.mood-button-group button {
+    background-color: blue;
+    border: 2 solid black;
+    color: white;
+    padding: 12px;
+    border-radius: 5px;
+    border-color: blue;
+    width: 10%;
+    cursor: pointer;
+    display: block;
+    margin-top: 8px;
+    font-size: 30px;
+}
+
+.mood-button-group button:hover {
+    background-color: white;
+    color: blue;
 }
 
 @media(max-height: 550px) {
