@@ -306,8 +306,8 @@ nav ul li:first-child a {
     left: 50%;
     top: 50%;
     -webkit-transform: translate(-50%, -50%);
-    transform: translate(-47%, -50%);
-    width: 100%;
+    transform: translate(-92%, -50%);
+    width: 50%;
 }
 
 .sleep-button-group button {
