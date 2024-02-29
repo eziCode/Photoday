@@ -328,6 +328,7 @@ nav ul li:first-child a {
     color: blue;
 }
 
+
 .mood-button-group button {
     background-color: blue;
     border: 2 solid black;
@@ -343,6 +344,64 @@ nav ul li:first-child a {
 }
 
 .mood-button-group button:hover {
+    background-color: white;
+    color: blue;
+}
+
+.caption-button {
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-45%, 300%);
+}
+
+.caption-button button {
+    background-color: blue;
+    border: 2 solid black;
+    color: rgb(255, 255, 255);
+    border-radius: 5px;
+    border-color: blue;
+    padding: 10px;
+}
+
+.caption-button button:hover {
+    background-color: white;
+    color: blue;
+}
+
+.caption-button input {
+    padding: 10px;
+}
+
+.submit-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, 500%);
+    width: 100%;
+}
+
+.submit-button button {
+    background-color: blue;
+    border: 2 solid black;
+    color: white;
+    padding: 12px;
+    border-radius: 5px;
+    border-color: blue;
+    width: 90%;
+    cursor: pointer;
+    display: block;
+    margin-top: 8px;
+}
+
+.submit-button button:hover {
     background-color: white;
     color: blue;
 }
