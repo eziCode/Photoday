@@ -26,6 +26,27 @@
         </ul>
     </nav>
 
+    <div class="date_search">
+        <input type="text" id="date_search_input_field" placeholder="Enter date here">
+        <button onclick="getDateFromSearch()">Search Dates</button>
+    </div>
+
+    <div class="mood_search">
+        <input type="text" id="mood_search_input_field" placeholder="Enter mood here">
+        <button onclick="getMoodFromSearch()">Search Moods</button>
+    </div>
+
+    <div class="sleep_search">
+        <input type="text" id="sleep_search_input_field" placeholder="Enter sleep hours here">
+        <button onclick="getSleepFromSearch()">Search Sleep Hours</button>
+    </div>
+
+    <div class="caption_search">
+        <input type="text" id="caption_search_input_field" placeholder="Enter caption here">
+        <button onclick="getCaptionFromSearch()">Search Captions</button>
+    </div>
+
+    <script src="/logic/search.js"></script>
     <script>
         function showSidebar() {
             const sidebar = document.querySelector('.sidebar')

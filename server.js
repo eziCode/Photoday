@@ -2,11 +2,19 @@ const express = require('express')
 const app = express()
 const bcrypt = require('bcrypt')
 const cors = require('cors')
+const mysql = require('mysql12');
 
 app.use(express.json())
 app.use(cors())
 
 const users = []
+
+// var connection = mysql.createConnection({
+//   host: '',
+//   user: '',
+//   password: '',
+//   database '',
+// });
 
 /*
 
