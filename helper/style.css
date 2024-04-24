@@ -376,7 +376,7 @@ nav ul li:first-child a {
     padding: 10px;
 }
 
-.date_search input, .mood_search input, .sleep_search input, .caption_search input {
+.date_search input, .mood_search input, .sleep_search input, .caption_search input, .name_text_field input, .email_text_field input {
     padding: 10px;
     width: 20%;
     margin-right: 15px;
@@ -438,6 +438,29 @@ nav ul li:first-child a {
     width: 90%;
 }
 
+.name_text_field {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, 900%);
+    width: 90%;
+}
+
+.email_text_field {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, 700%);
+    width: 90%;
+
+}
+
 .submit-button button {
     background-color: blue;
     border: 2 solid black;
@@ -456,7 +479,7 @@ nav ul li:first-child a {
     color: blue;
 }
 
-.date_search button, .mood_search button, .sleep_search button, .caption_search button {
+.date_search button, .mood_search button, .sleep_search button, .caption_search button, .name_text_field button, .email_text_field button {
     background-color: blue;
     border: 2 solid black;
     color: white;
@@ -469,7 +492,7 @@ nav ul li:first-child a {
     margin-top: 8px;
 }
 
-.date_search button:hover, .mood_search button:hover, .sleep_search button:hover, .caption_search button:hover {
+.date_search button:hover, .mood_search button:hover, .sleep_search button:hover, .caption_search button:hover, , .email_text_field button:hover, , .name_text_field button:hover {
     background-color: white;
     color: blue;
 }

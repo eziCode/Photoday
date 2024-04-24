@@ -26,6 +26,17 @@
         </ul>
     </nav>
 
+    <div class="name_text_field">
+        <input type="text" id="name_text_field_input" placeholder="Enter new name here">
+        <button onclick="getNameFromField()">Submit Name Change</button>
+    </div>
+
+    <div class="email_text_field">
+        <input type="text" id="email_text_field_input" placeholder="Enter new email here">
+        <button onclick="getEmailFromField()">Submit Email Change</button>
+    </div>
+
+    <script src="/logic/profile.js"></script>
     <script>
         function showSidebar() {
             const sidebar = document.querySelector('.sidebar')
