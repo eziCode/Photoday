@@ -406,6 +406,19 @@ nav ul li:first-child a {
     color: blue;
 }
 
+.date_search button, .mood_search button, .sleep_search button, .caption_search button {
+    background-color: blue;
+    border: 2 solid black;
+    color: white;
+    padding: 12px;
+    border-radius: 5px;
+    border-color: blue;
+    width: 90%;
+    cursor: pointer;
+    display: block;
+    margin-top: 8px;
+}
+
 @media(max-height: 550px) {
     .account-creation-field input {
         padding: 4px;
