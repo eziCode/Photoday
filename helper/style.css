@@ -376,6 +376,12 @@ nav ul li:first-child a {
     padding: 10px;
 }
 
+.date_search input, .mood_search input, .sleep_search input, .caption_search input {
+    padding: 10px;
+    width: 20%;
+    margin-right: 15px;
+}
+
 .submit-button {
     display: flex;
     justify-content: center;
@@ -386,6 +392,50 @@ nav ul li:first-child a {
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, 500%);
     width: 100%;
+}
+
+.date_search {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, 500%);
+    width: 100%;
+}
+
+.mood_search {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, 300%);
+    width: 100%;
+}
+
+.sleep_search {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, 100%);
+    width: 100%;
+}
+
+.caption_search {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, 700%);
+    width: 90%;
 }
 
 .submit-button button {
@@ -413,10 +463,19 @@ nav ul li:first-child a {
     padding: 12px;
     border-radius: 5px;
     border-color: blue;
-    width: 90%;
+    width: 15%;
     cursor: pointer;
     display: block;
     margin-top: 8px;
+}
+
+.date_search button:hover, .mood_search button:hover, .sleep_search button:hover, .caption_search button:hover {
+    background-color: white;
+    color: blue;
+}
+
+.caption-button input {
+    padding: 10px;
 }
 
 @media(max-height: 550px) {
