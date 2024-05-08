@@ -86,6 +86,7 @@ navigator.mediaDevices.getUserMedia({
 let entry = new JournalEntry();
 let photo = new Photo();
 let emotions = new Emotions();
+let user_name = '';
 
 function capturePhoto() {
     const canvas = document.createElement('canvas');
@@ -121,13 +122,45 @@ function getCaption() {
 function getName() {
     const name = document.getElementById('name').value;
     document.getElementById('name').value = '';
+    user_name = name;
 }
 
 function submitEntry() {
     // Upload entry to backend
     entry.emotions = emotions;
     entry.photo = photo;
-    // Clear entry form
-    emotions.resetClass();
-    photo.resetClass();
+    const entryData = {
+        name: user_name,
+        entry: {
+            creation_date: entry.creation_date,
+            emotions: {
+                mood: emotions._mood,
+                sleep_amount: emotions._sleep_amount
+            },
+            photo: {
+                photo: photo._photo,
+                caption: photo._caption
+            }
+        }
+    };
+    fetch('/users/insert_entry', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(entryData)
+    })
+    .then(response => {
+        if (response.ok) {
+            console.log('Entry submitted successfully');
+            // Clear entry form
+            emotions.resetClass();
+            photo.resetClass();
+        } else {
+            console.error('Failed to submit entry');
+        }
+    })
+    .catch(error => {
+        console.error('Error submitting entry:', error);
+    });
 }

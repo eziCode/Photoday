@@ -43,9 +43,26 @@ app.post('/users', async (req, res) => {
 
 app.post('/users/insert_entry', async (req, res) => {
   try {
-    
+    const name = req.body.name;
+    const mood = req.body.emotinos.mood;
+    const sleep_amount = req.body.emotions.sleep_amount;
+    const photo_data = req.body.photo.photo;
+    const photo_caption = req.body.photo.caption;
+    const creation_date = req.body.entry.creation_date;
+    connection.query(
+      'INSERT INTO... ',
+      [fields],
+      (err, results) => {
+        if (err) {
+          console.log("Error occured while inserting entry: ", err);
+          res.status(500).send('Error');
+        } else {
+          res.status(201).send('Success');
+        }
+      }
+    );
   } catch {
-    
+    res.status(500).send('Error')
   }
 })
 
