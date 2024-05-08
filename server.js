@@ -83,6 +83,7 @@ app.post('/users/insert_entry', async (req, res) => {
 app.post('/users/change_email', async (req, res) => {
   try {
     const email = req.body.email;
+    const user_name = req.body.user_name;
     connection.query(
       'UPDATE...',
       [fields],
@@ -103,6 +104,7 @@ app.post('/users/change_email', async (req, res) => {
 app.post('/users/change_name', async (req, res) => {
   try {
     const name = req.body.email;
+    const user_name = req.body.user_name;
     connection.query(
       'UPDATE...',
       [fields],
