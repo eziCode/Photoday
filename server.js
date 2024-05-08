@@ -34,6 +34,20 @@ app.post('/users', async (req, res) => {
   try {
     const hashedPassword = await bcrypt.hash(req.body.password, 10)
     const user = { name: req.body.username, password: hashedPassword }
+    const name = req.body.name;
+    const email = req.body.email;
+    connection.query(
+      'INSERT INTO...',
+      [fields],
+      (err, results) => {
+        if (err) {
+          console.log("Error occured while creating user: ", err);
+          res.status(500).send('Error');
+        } else {
+          res.status(201).send('Success');
+        }
+      }
+    );
     users.push(user)
     res.status(201).send('Success')
   } catch {
@@ -44,10 +58,10 @@ app.post('/users', async (req, res) => {
 app.post('/users/insert_entry', async (req, res) => {
   try {
     const name = req.body.name;
-    const mood = req.body.emotinos.mood;
-    const sleep_amount = req.body.emotions.sleep_amount;
-    const photo_data = req.body.photo.photo;
-    const photo_caption = req.body.photo.caption;
+    const mood = req.body.entry.emotions.mood;
+    const sleep_amount = req.body.entry.emotions.sleep_amount;
+    const photo_data = req.body.entry.photo.photo;
+    const photo_caption = req.body.entry.photo.caption;
     const creation_date = req.body.entry.creation_date;
     connection.query(
       'INSERT INTO... ',
@@ -55,6 +69,46 @@ app.post('/users/insert_entry', async (req, res) => {
       (err, results) => {
         if (err) {
           console.log("Error occured while inserting entry: ", err);
+          res.status(500).send('Error');
+        } else {
+          res.status(201).send('Success');
+        }
+      }
+    );
+  } catch {
+    res.status(500).send('Error')
+  }
+})
+
+app.post('/users/change_email', async (req, res) => {
+  try {
+    const email = req.body.email;
+    connection.query(
+      'UPDATE...',
+      [fields],
+      (err, results) => {
+        if (err) {
+          console.log("Error occured while changing email: ", err);
+          res.status(500).send('Error');
+        } else {
+          res.status(201).send('Success');
+        }
+      }
+    );
+  } catch {
+    res.status(500).send('Error')
+  }
+})
+
+app.post('/users/change_name', async (req, res) => {
+  try {
+    const name = req.body.email;
+    connection.query(
+      'UPDATE...',
+      [fields],
+      (err, results) => {
+        if (err) {
+          console.log("Error occured while changing name: ", err);
           res.status(500).send('Error');
         } else {
           res.status(201).send('Success');

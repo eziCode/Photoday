@@ -13,7 +13,9 @@ function createAccountButtonTapped() {
 
     let data = {
         username: username,
-        password: password
+        password: password,
+        name: name,
+        email: email
     }
 
     fetch('http://localhost:3000/users', {
