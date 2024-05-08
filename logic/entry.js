@@ -118,6 +118,11 @@ function getCaption() {
     photo.caption = caption;
 }
 
+function getName() {
+    const name = document.getElementById('name').value;
+    document.getElementById('name').value = '';
+}
+
 function submitEntry() {
     // Upload entry to backend
     entry.emotions = emotions;

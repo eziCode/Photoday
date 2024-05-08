@@ -1,25 +1,28 @@
-const express = require('express')
+const express = require('express');
 const app = express()
 const bcrypt = require('bcrypt')
 const cors = require('cors')
-const mysql = require('mysql12');
+const mysql = require('mysql2');
+const json = require('body-parser');
 
 app.use(express.json())
 app.use(cors())
 
 const users = []
 
-// var connection = mysql.createConnection({
-//   host: '',
-//   user: '',
-//   password: '',
-//   database '',
-// });
+var connection = mysql.createConnection({
+  host: '104.198.193.236',
+  user: 'root',
+  password: 'test1234',
+  database: 'Journal'
+});
+
+connection.connect;
 
 /*
 
-RUN SERVER: forever start server.js
-STOP SERVER: forever stop server.js
+RUN SERVER: node server.js
+STOP SERVER: alt + c (mac) / cmd + c (windows)
 
 */
 
@@ -35,6 +38,14 @@ app.post('/users', async (req, res) => {
     res.status(201).send('Success')
   } catch {
     res.status(500).send('Error')
+  }
+})
+
+app.post('/users/insert_entry', async (req, res) => {
+  try {
+    
+  } catch {
+    
   }
 })
 
@@ -54,4 +65,7 @@ app.post('/users/login', async (req, res) => {
   }
 })
 
-app.listen(3000)
+const PORT = process.env.PORT || 3000
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`)
+})
