@@ -3,21 +3,26 @@ const app = express()
 const bcrypt = require('bcrypt')
 const cors = require('cors')
 const mysql = require('mysql2');
-const json = require('body-parser');
-
-app.use(express.json())
-app.use(cors())
+const exp = require('constants');
 
 const users = []
 
-var connection = mysql.createConnection({
-  host: '104.198.193.236',
-  user: 'root',
-  password: 'test1234',
-  database: 'Journal'
-});
+var connection = {"none": "none"};
 
-connection.connect;
+app.use(express.json({limit: '10mb'}))
+app.use(cors({
+  origin: 'http://127.0.0.1:5500'
+}));
+app.use('/uploads', express.static('uploads'));
+
+// var connection = mysql.createConnection({
+//   host: '104.198.193.236',
+//   user: 'root',
+//   password: 'test1234',
+//   database: 'Journal'
+// });
+
+// connection.connect;
 
 /*
 
@@ -84,6 +89,10 @@ app.post('/users/delete_account', async (req, res) => {
   }
 });
 
+app.post('/users/test_path', async (req, res) => {
+  res.status(201).send('Success');
+})
+
 app.post('/users/insert_entry', async (req, res) => {
   try {
     const name = req.body.name;
@@ -113,7 +122,7 @@ app.post('/users/insert_entry', async (req, res) => {
               } else {
                 connection.query(
                   'INSERT INTO Photo (PhotoID, Photo_Creation_Date, Caption, Reference_URL, EntryID) VALUES (?, ?, ?, ?, ?)',
-                  [photoUUID, new Date(), photo_caption, "nah", entryUUID],
+                  [photoUUID, new Date(), photo_caption, photo_data, entryUUID],
                   (err, results) => {
                     if (err) {
                       console.log("Error occured while inserting photo: ", err);

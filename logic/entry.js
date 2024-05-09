@@ -94,9 +94,8 @@ function capturePhoto() {
     canvas.width = video.videoWidth;
     canvas.height = video.videoHeight;
     context.drawImage(video, 0, 0, canvas.width, canvas.height);
-    const dataURL = canvas.toDataURL('image/png');
-    // Link button to backend and capture photo
-    photo.photo = dataURL;
+    const photoData = canvas.toDataURL('image/png');
+    
 }
 
 function getHours(button) {
@@ -143,7 +142,7 @@ function submitEntry() {
             }
         }
     };
-    fetch('/users/insert_entry', {
+    fetch('http://localhost:3000/users/insert_entry', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
