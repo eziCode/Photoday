@@ -3,17 +3,29 @@ const app = express()
 const bcrypt = require('bcrypt')
 const cors = require('cors')
 const mysql = require('mysql2');
-const exp = require('constants');
+const multer = require('multer');
+const path = require('path');
+
+// const storage = multer.diskStorage({
+//   destination: function(req, file, cb) {
+//     cb(null, 'uploads');
+//   },
+//   filename: function(req, file, cb) {
+//     cb(null, Date.now() + path.extname(file.originalname));
+//   }
+// });
+
+// const upload = multer({storage: storage});
 
 const users = []
 
 var connection = {"none": "none"};
 
-app.use(express.json({limit: '10mb'}))
+app.use(express.json())
 app.use(cors({
   origin: 'http://127.0.0.1:5500'
 }));
-app.use('/uploads', express.static('uploads'));
+// app.use('/uploads', express.static('uploads'));
 
 // var connection = mysql.createConnection({
 //   host: '104.198.193.236',
@@ -88,10 +100,6 @@ app.post('/users/delete_account', async (req, res) => {
     res.status(500).send('Error')
   }
 });
-
-app.post('/users/test_path', async (req, res) => {
-  res.status(201).send('Success');
-})
 
 app.post('/users/insert_entry', async (req, res) => {
   try {
