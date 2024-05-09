@@ -13,14 +13,14 @@ app.use(cors({
   origin: 'http://127.0.0.1:5500'
 }));
 
-var connection = mysql.createConnection({
-  host: '104.198.193.236',
-  user: 'root',
-  password: 'test1234',
-  database: 'Journal'
-});
+// var connection = mysql.createConnection({
+//   host: '104.198.193.236',
+//   user: 'root',
+//   password: 'test1234',
+//   database: 'Journal'
+// });
 
-connection.connect;
+// connection.connect;
 
 /*
 
@@ -31,6 +31,75 @@ STOP SERVER: alt + c (mac) / cmd + c (windows)
 
 app.get('/users', (req, res) => {
   res.json(users)
+})
+
+app.get('/users/search_by_caption', async (req, res) => {
+  const name = req.body.name;
+  const caption = req.body.caption;
+  connection.query(
+    'SELECT * FROM Entry WHERE UserID = ? AND PhotoID IN (SELECT PhotoID FROM Photo WHERE Caption = ?)',
+    [name, caption],
+    (err, results) => {
+      if (err) {
+        console.log("Error occured while searching by caption: ", err);
+        res.status(500).send('Error');
+      } else {
+        res.status(201).send(results);
+      }
+    }
+  );
+})
+
+app.get('/users/search_by_sleep', async (req, res) => {
+  const name = req.body.name;
+  const sleep = req.body.sleep;
+  connection.query(
+    'SELECT * FROM Entry WHERE UserID = ? AND Sleep_Amount = ?',
+    [name, sleep],
+    (err, results) => {
+      if (err) {
+        console.log("Error occured while searching by sleep: ", err);
+        res.status(500).send('Error');
+      } else {
+        res.status(201).send(results);
+      }
+    }
+  );
+})
+
+app.get('/users/search_by_mood', async (req, res) => {
+  const name = req.body.name;
+  const mood = req.body.mood;
+  connection.query(
+    'SELECT * FROM Entry WHERE UserID = ? AND EmotionID IN (SELECT EmotionID FROM Emotions WHERE Type = ?)',
+    [name, mood],
+    (err, results) => {
+      if (err) {
+        console.log("Error occured while searching by mood: ", err);
+        res.status(500).send('Error');
+      } else {
+        res.status(201).send(results);
+      }
+    }
+  );
+})
+
+
+app.get('/users/search_by_date', async (req, res) => {
+  const name = req.body.name;
+  const date = req.body.date;
+  connection.query(
+    'SELECT * FROM Entry WHERE UserID = ? AND Entry_Creation_Date = ?',
+    [name, date],
+    (err, results) => {
+      if (err) {
+        console.log("Error occured while searching by date: ", err);
+        res.status(500).send('Error');
+      } else {
+        res.status(201).send(results);
+      }
+    }
+  );
 })
 
 app.post('/users', async (req, res) => {

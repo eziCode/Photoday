@@ -19,37 +19,77 @@ function getCaptionFromSearch() {
     console.log(getName());
     document.getElementById('caption_search_input_field').value = '';
     if (getName() !== undefined) {
-
+        fetch('http://localhost:3000/users/search_by_caption', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ name: getName(), caption: captionQuery })
+        })
+        .then(response => {
+            // figure out how to return and display the response
+            return response.json();
+        })
     } else {
         showAlert('Please enter a name');
     }
 }
 
 function getSleepFromSearch() {
-    const captionQuery = document.getElementById('sleep_search_input_field').value;
+    const sleepQuery = document.getElementById('sleep_search_input_field').value;
     document.getElementById('sleep_search_input_field').value = '';
     if (getName() !== undefined) {
-
+        fetch('http://localhost:3000/users/search_by_sleep', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ name: getName(), sleep: sleepQuery })
+        })
+        .then(response => {
+            // figure out how to return and display the response
+            return response.json();
+        })
     } else {
         showAlert('Please enter a name');
     }
 }
 
 function getMoodFromSearch() {
-    const captionQuery = document.getElementById('mood_search_input_field').value;
+    const moodQuery = document.getElementById('mood_search_input_field').value;
     document.getElementById('mood_search_input_field').value = '';
     if (getName() !== undefined) {
-
+        fetch('http://localhost:3000/users/search_by_mood', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ name: getName(), mood: moodQuery })
+        })
+        .then(response => {
+            // figure out how to return and display the response
+            return response.json();
+        })
     } else {
         showAlert('Please enter a name');
     }
 }
 
 function getDateFromSearch() {
-    const captionQuery = document.getElementById('date_search_input_field').value;
+    const dateQuery = document.getElementById('date_search_input_field').value;
     document.getElementById('date_search_input_field').value = '';
     if (getName() !== undefined) {
-
+        fetch('http://localhost:3000/users/search_by_date', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ name: getName(), date: dateQuery })
+        })
+        .then(response => {
+            // figure out how to return and display the response
+            return response.json();
+        })
     } else {
         showAlert('Please enter a name');
     }

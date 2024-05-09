@@ -126,6 +126,22 @@ function getName() {
 
 function submitEntry() {
     // Upload entry to backend
+    if (user_name === '') {
+        console.error('Name is required');
+        return;
+    }
+    if (emotions._mood === '' || emotions._sleep_amount === -1) {
+        console.error('Mood and sleep amount are required');
+        return;
+    }
+    if (photo._photo === '') {
+        console.error('Photo is required');
+        return;
+    }
+    if (photo._caption === '') {
+        console.error('Caption is required');
+        return;
+    }
     entry.emotions = emotions;
     entry.photo = photo;
     const entryData = {
