@@ -67,6 +67,11 @@ app.post('/users/delete_account', async (req, res) => {
           res.status(500).send('Error');
         } else {
           res.status(201).send('Success');
+          const deleted_user = users.filter(user => user.name === req.body.username);
+          if (deleted_user !== -1) {
+            users.splice(deleted_user, 1);
+          }
+          delete deleted_user.password;
         }
       }
     );

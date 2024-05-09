@@ -1,3 +1,5 @@
+const { response } = require("express");
+
 var user_name = '';
 
 function getNameFromField() {
@@ -13,6 +15,22 @@ function getNameFromField() {
         },
         body : JSON.stringify(data)
     })
+    .then(response => {
+        if(response.ok) {
+            return response.text();
+        } else {
+            console.log("Error occured while changing name");
+        }
+        throw new Error('Failed to change name');
+    })
+    .then(result =>{
+        if (result.trim() === 'Success') {
+            window.location.href = 'http://127.0.0.1:5500/src/index.html';
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
 }
 
 function getEmailFromField() {
@@ -28,6 +46,22 @@ function getEmailFromField() {
         },
         body : JSON.stringify(data)
     })
+    .then(response => {
+        if(response.ok) {
+            return response.text();
+        } else {
+            console.log("Error occured while changing email");
+        }
+        throw new Error('Failed to change email');
+    })
+    .then(result =>{
+        if (result.trim() === 'Success') {
+            window.location.href = 'http://127.0.0.1:5500/src/index.html';
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
 }
 
 function getName() {
@@ -47,5 +81,21 @@ function getDeleteAccount() {
             },
             body : JSON.stringify({user_name: user_name})
         })
+        .then(response => {
+            if(response.ok) {
+                return response.text();
+            } else {
+                console.log("Error occured while deleting user");
+            }
+            throw new Error('Failed to delete user');
+        })
+        .then(result =>{
+            if (result.trim() === 'Success') {
+                window.location.href = 'http://127.0.0.1:5500/src/index.html';
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
     }
 }
