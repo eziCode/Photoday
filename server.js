@@ -36,6 +36,10 @@ app.post('/users', async (req, res) => {
     const user = { name: req.body.username, password: hashedPassword }
     const name = req.body.name;
     const email = req.body.email;
+    const userExists = users.some(user => user.name === req.body.username);
+    if (userExists) {
+      return res.status(400).send('User already exists');
+    }
     connection.query(
       'INSERT INTO User(UserID, Name, Account_Creation_Date, Age, Email_Address, Birthday)',
       [user.name, name, new Date(), 0, email, new Date()],
