@@ -37,8 +37,8 @@ app.post('/users', async (req, res) => {
     const name = req.body.name;
     const email = req.body.email;
     connection.query(
-      'INSERT INTO...',
-      [fields],
+      'INSERT INTO User(UserID, Name, Account_Creation_Date, Age, Email_Address, Birthday)',
+      [user.name, name, new Date(), 0, email, new Date()],
       (err, results) => {
         if (err) {
           console.log("Error occured while creating user: ", err);
@@ -82,11 +82,11 @@ app.post('/users/insert_entry', async (req, res) => {
 
 app.post('/users/change_email', async (req, res) => {
   try {
-    const email = req.body.email;
-    const user_name = req.body.user_name;
+    const newEmail = req.body.email;
+    const userName = req.body.user_name;
     connection.query(
-      'UPDATE...',
-      [fields],
+      'UPDATE User SET Email_Address = ? WHERE UserID = ?',
+      [newEmail, userName],
       (err, results) => {
         if (err) {
           console.log("Error occured while changing email: ", err);
@@ -106,8 +106,8 @@ app.post('/users/change_name', async (req, res) => {
     const name = req.body.email;
     const user_name = req.body.user_name;
     connection.query(
-      'UPDATE...',
-      [fields],
+      'UPDATE User SET Name = ? WHERE UserID = ?',
+      [name, user_name],
       (err, results) => {
         if (err) {
           console.log("Error occured while changing name: ", err);
