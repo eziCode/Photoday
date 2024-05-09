@@ -92,14 +92,40 @@ app.post('/users/insert_entry', async (req, res) => {
     const photo_data = req.body.entry.photo.photo;
     const photo_caption = req.body.entry.photo.caption;
     const creation_date = req.body.entry.creation_date;
+    const emotionUUID = uuidv4();
+    const photoUUID = uuidv4();
+    const entryUUID = uuidv4();
     connection.query(
-      'INSERT INTO... ',
-      [fields],
+      'INSERT INTO Entry (EntryID, Entry_Creation_Date, UserID, EmotionID, PhotoID, Sleep_Amount) VALUES (?, ?, ?, ?, ?, ?)',
+      [entryUUID, creation_date, name, emotionUUID, photoUUID, sleep_amount],
       (err, results) => {
         if (err) {
           console.log("Error occured while inserting entry: ", err);
           res.status(500).send('Error');
         } else {
+          connection.query(
+            'INSERT INTO Emotions (EmotionID, Emotion_Creation_Date, Type, Value, EntryID) VALUES (?, ?, ?, ?, ?)',
+            [emotionUUID, new Date(), mood, "nah", entryUUID],
+            (err, results) => {
+              if (err) {
+                console.log("Error occured while inserting emotion: ", err);
+                res.status(500).send('Error');
+              } else {
+                connection.query(
+                  'INSERT INTO Photo (PhotoID, Photo_Creation_Date, Caption, Reference_URL, EntryID) VALUES (?, ?, ?, ?, ?)',
+                  [photoUUID, new Date(), photo_caption, "nah", entryUUID],
+                  (err, results) => {
+                    if (err) {
+                      console.log("Error occured while inserting photo: ", err);
+                      res.status(500).send('Error');
+                    } else {
+                      res.status(201).send('Success');
+                    }
+                  }
+                );
+              }
+            }
+          );
           res.status(201).send('Success');
         }
       }

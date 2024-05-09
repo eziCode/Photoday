@@ -378,7 +378,17 @@ nav ul li:first-child a {
     transform: translate(-45%, 500%);
 }
 
-.caption-button button, .name-button button, .name-button-search button {
+.delete-account-button {
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-45%, -290%);
+}
+
+.caption-button button, .name-button button, .name-button-search button, .delete-account-button button {
     background-color: blue;
     border: 2 solid black;
     color: rgb(255, 255, 255);
@@ -387,12 +397,12 @@ nav ul li:first-child a {
     padding: 10px;
 }
 
-.caption-button button:hover, .name-button button:hover, .name-button-search button:hover {
+.caption-button button:hover, .name-button button:hover, .name-button-search button:hover, .delete-account-button button:hover {
     background-color: white;
     color: blue;
 }
 
-.caption-button input, .name-button-search input {
+.caption-button input, .name-button-search input, .delete-account-button input {
     padding: 10px;
 }
 
