@@ -6,21 +6,27 @@ const mysql = require('mysql2');
 
 const users = []
 
-var connection = {"none": "none"};
+// var connection = {"none": "none"};
 
 app.use(express.json())
 app.use(cors({
   origin: 'http://127.0.0.1:5500'
 }));
 
-// var connection = mysql.createConnection({
-//   host: '104.198.193.236',
-//   user: 'root',
-//   password: 'test1234',
-//   database: 'Journal'
-// });
+var connection = mysql.createConnection({
+  host: '104.198.193.236',
+  user: 'root',
+  password: 'test1234',
+  database: 'Journal'
+});
 
-// connection.connect;
+connection.connect(function(err) {
+  if (err) {
+    console.log("Error occured while connecting to database: ", err);
+    return;
+  }
+  console.log("Connected to database!");
+});
 
 /*
 
@@ -34,8 +40,8 @@ app.get('/users', (req, res) => {
 })
 
 app.get('/users/search_by_caption', async (req, res) => {
-  const name = req.body.name;
-  const caption = req.body.caption;
+  const name = req.query.name;
+  const caption = req.query.caption;
   connection.query(
     'SELECT * FROM Entry WHERE UserID = ? AND PhotoID IN (SELECT PhotoID FROM Photo WHERE Caption = ?)',
     [name, caption],
@@ -51,8 +57,8 @@ app.get('/users/search_by_caption', async (req, res) => {
 })
 
 app.get('/users/search_by_sleep', async (req, res) => {
-  const name = req.body.name;
-  const sleep = req.body.sleep;
+  const name = req.query.name;
+  const sleep = req.query.sleep;
   connection.query(
     'SELECT * FROM Entry WHERE UserID = ? AND Sleep_Amount = ?',
     [name, sleep],
@@ -68,8 +74,8 @@ app.get('/users/search_by_sleep', async (req, res) => {
 })
 
 app.get('/users/search_by_mood', async (req, res) => {
-  const name = req.body.name;
-  const mood = req.body.mood;
+  const name = req.query.name;
+  const mood = req.query.mood;
   connection.query(
     'SELECT * FROM Entry WHERE UserID = ? AND EmotionID IN (SELECT EmotionID FROM Emotions WHERE Type = ?)',
     [name, mood],
@@ -86,8 +92,8 @@ app.get('/users/search_by_mood', async (req, res) => {
 
 
 app.get('/users/search_by_date', async (req, res) => {
-  const name = req.body.name;
-  const date = req.body.date;
+  const name = req.query.name;
+  const date = req.query.date;
   connection.query(
     'SELECT * FROM Entry WHERE UserID = ? AND Entry_Creation_Date = ?',
     [name, date],
