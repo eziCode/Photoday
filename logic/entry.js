@@ -91,10 +91,11 @@ let user_name = '';
 function capturePhoto() {
     const canvas = document.createElement('canvas');
     const context = canvas.getContext('2d');
-    canvas.width = video.videoWidth;
-    canvas.height = video.videoHeight;
+    canvas.width = video.videoWidth / 2;
+    canvas.height = video.videoHeight / 2;
     context.drawImage(video, 0, 0, canvas.width, canvas.height);
-    const photoData = canvas.toDataURL('image/png');
+    const photoData = canvas.toDataURL('image/png', 0.5);
+    photo.photo = photoData;
 }
 
 function getHours(button) {
