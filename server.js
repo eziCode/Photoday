@@ -55,6 +55,26 @@ app.post('/users', async (req, res) => {
   }
 })
 
+app.post('/users/delete_account', async (req, res) => {
+  try {
+    const user_name = req.body.user_name;
+    connection.query(
+      'DELETE FROM User WHERE UserID = ?',
+      [user_name],
+      (err, results) => {
+        if (err) {
+          console.log("Error occured while deleting user: ", err);
+          res.status(500).send('Error');
+        } else {
+          res.status(201).send('Success');
+        }
+      }
+    );
+  } catch {
+    res.status(500).send('Error')
+  }
+});
+
 app.post('/users/insert_entry', async (req, res) => {
   try {
     const name = req.body.name;

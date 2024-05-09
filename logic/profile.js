@@ -35,3 +35,17 @@ function getName() {
     document.getElementById('name').value = '';
     user_name = name;
 }
+
+function getDeleteAccount() {
+    const value = document.getElementById('delete-field').value;
+    document.getElementById('delete-field').value = '';
+    if (value == "confirm") {
+        fetch('http://localhost:3000/users/delete_account', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body : JSON.stringify({user_name: user_name})
+        })
+    }
+}
