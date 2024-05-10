@@ -111,6 +111,7 @@ function getMood(button) {
     emotions.mood = mood;
 }
 
+
 function getCaption() {
     const caption = document.getElementById('caption').value;
     document.getElementById('caption').value = '';
