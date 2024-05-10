@@ -6,18 +6,17 @@ const mysql = require('mysql2');
 
 const users = []
 
-// var connection = {"none": "none"};
-
 app.use(express.json())
 app.use(cors({
   origin: 'http://127.0.0.1:5500'
 }));
 
 var connection = mysql.createConnection({
+  connectionLimit: 10,
   host: '104.198.193.236',
   user: 'root',
   password: 'test1234',
-  database: 'Journal'
+  database: 'NewJournal'
 });
 
 connection.connect(function(err) {
@@ -108,34 +107,37 @@ app.get('/users/search_by_date', async (req, res) => {
   );
 })
 
+const submittedUsers = new Set();
+
 app.post('/users', async (req, res) => {
   try {
-    const hashedPassword = await bcrypt.hash(req.body.password, 10)
-    const user = { name: req.body.username, password: hashedPassword }
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
+    const user = { name: req.body.username, password: hashedPassword };
     const name = req.body.name;
     const email = req.body.email;
     const userExists = users.some(user => user.name === req.body.username);
     if (userExists) {
       return res.status(400).send('User already exists');
     }
+    if (submittedUsers.has(user.name)) {
+      return res.status(400).send('User creation in progress');
+    }
     connection.query(
-      'INSERT INTO User(UserID, Name, Account_Creation_Date, Age, Email_Address, Birthday)',
-      [user.name, name, new Date(), 0, email, new Date()],
+      'INSERT INTO User(UserID, Name, Account_Creation_Date, Age, Email_Address, Birthday) VALUES (?, ?, ?, ?, ?, ?)',
+      [user.name, name, "5/9/2024", 0, email, "8/3/2007"],
       (err, results) => {
         if (err) {
-          console.log("Error occured while creating user: ", err);
-          res.status(500).send('Error');
-        } else {
-          res.status(201).send('Success');
+          console.log("Error occurred while creating user: ", err);
+          return res.status(500).send('Error');
         }
+        users.push(user);
+        res.status(201).send('Success');
       }
     );
-    users.push(user)
-    res.status(201).send('Success')
   } catch {
-    res.status(500).send('Error')
+    res.status(500).send('Error');
   }
-})
+});
 
 app.post('/users/delete_account', async (req, res) => {
   try {
@@ -149,7 +151,7 @@ app.post('/users/delete_account', async (req, res) => {
           res.status(500).send('Error');
         } else {
           res.status(201).send('Success');
-          const deleted_user = users.filter(user => user.name === req.body.username);
+          const deleted_user = users.findIndex(user => user.name === req.body.username);
           if (deleted_user !== -1) {
             users.splice(deleted_user, 1);
           }
@@ -163,39 +165,38 @@ app.post('/users/delete_account', async (req, res) => {
 });
 
 app.post('/users/insert_entry', async (req, res) => {
-  try {
     const name = req.body.name;
     const mood = req.body.entry.emotions.mood;
     const sleep_amount = req.body.entry.emotions.sleep_amount;
     const photo_data = req.body.entry.photo.photo;
     const photo_caption = req.body.entry.photo.caption;
     const creation_date = req.body.entry.creation_date;
-    const emotionUUID = uuidv4();
-    const photoUUID = uuidv4();
-    const entryUUID = uuidv4();
+    const emotionUUID = Math.floor(Math.random() * 2147483647);
+    const photoUUID = Math.floor(Math.random() * 2147483647);
+    const entryUUID = Math.floor(Math.random() * 2147483647);
     connection.query(
-      'INSERT INTO Entry (EntryID, Entry_Creation_Date, UserID, EmotionID, PhotoID, Sleep_Amount) VALUES (?, ?, ?, ?, ?, ?)',
-      [entryUUID, creation_date, name, emotionUUID, photoUUID, sleep_amount],
+      'INSERT INTO Emotions (EmotionID, Emotion_Creation_Date, Type, Value) VALUES (?, ?, ?, ?)',
+      [emotionUUID, new Date(), mood, "nah"],
       (err, results) => {
         if (err) {
-          console.log("Error occured while inserting entry: ", err);
-          res.status(500).send('Error');
+          console.log("Error occured while inserting emotion: ", err);
+          res.status(500).send('Error on emotion insert');
         } else {
           connection.query(
-            'INSERT INTO Emotions (EmotionID, Emotion_Creation_Date, Type, Value, EntryID) VALUES (?, ?, ?, ?, ?)',
-            [emotionUUID, new Date(), mood, "nah", entryUUID],
+            'INSERT INTO Photo (PhotoID, Photo_Creation_Date, Caption, Reference_URL) VALUES (?, ?, ?, ?)',
+            [photoUUID, new Date(), photo_caption, photo_data, entryUUID],
             (err, results) => {
               if (err) {
-                console.log("Error occured while inserting emotion: ", err);
-                res.status(500).send('Error');
+                console.log("Error occured while inserting photo: ", err);
+                res.status(500).send('Error on photo insert');
               } else {
                 connection.query(
-                  'INSERT INTO Photo (PhotoID, Photo_Creation_Date, Caption, Reference_URL, EntryID) VALUES (?, ?, ?, ?, ?)',
-                  [photoUUID, new Date(), photo_caption, photo_data, entryUUID],
+                  'INSERT INTO Entry (EntryID, Entry_Creation_Date, UserID, EmotionID, PhotoID, Sleep_Amount) VALUES (?, ?, ?, ?, ?, ?)',
+                  [entryUUID, creation_date, name, emotionUUID, photoUUID, sleep_amount],
                   (err, results) => {
                     if (err) {
-                      console.log("Error occured while inserting photo: ", err);
-                      res.status(500).send('Error');
+                      console.log("Error occured while inserting entry: ", err);
+                      res.status(500).send('Error on entry insert');
                     } else {
                       res.status(201).send('Success');
                     }
@@ -204,13 +205,10 @@ app.post('/users/insert_entry', async (req, res) => {
               }
             }
           );
-          res.status(201).send('Success');
         }
       }
     );
-  } catch {
-    res.status(500).send('Error')
-  }
+    
 })
 
 app.post('/users/change_email', async (req, res) => {

@@ -153,7 +153,7 @@ function submitEntry() {
                 sleep_amount: emotions._sleep_amount
             },
             photo: {
-                photo: photo._photo,
+                photo: "reference_url_placeholder", // need to figure out how to store the photo
                 caption: photo._caption
             }
         }
@@ -172,7 +172,7 @@ function submitEntry() {
             emotions.resetClass();
             photo.resetClass();
         } else {
-            console.error('Failed to submit entry');
+            console.error('Failed to submit entry: ', response.text());
         }
     })
     .catch(error => {
