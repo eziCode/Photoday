@@ -12,6 +12,24 @@ app.use(cors({
   origin: 'http://127.0.0.1:5500'
 }));
 
+function format_date() {
+  const currentDate = new Date();
+  let formattedDateTime = currentDate.toLocaleString('en-US', {
+    month: '2-digit',
+    day: '2-digit',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+    hour12: false
+  });
+
+  const hours = currentDate.getHours() % 24;
+  formattedDateTime = formattedDateTime.replace(/\d{2}(?=:)/, ('0' + hours).slice(-2));
+  return formattedDateTime;
+}
+
+
 var connection = mysql.createConnection({
   connectionLimit: 10,
   host: '104.198.193.236',
@@ -125,7 +143,7 @@ app.post('/users', async (req, res) => {
     }
     connection.query(
       'INSERT INTO User(UserID, Name, Account_Creation_Date, Age, Email_Address, Birthday) VALUES (?, ?, ?, ?, ?, ?)',
-      [user.name, name, "5/9/2024", 0, email, "8/3/2007"],
+      [user.name, name, format_date(), 0, email, "8/3/2007"],
       (err, results) => {
         if (err) {
           console.log("Error occurred while creating user: ", err);
