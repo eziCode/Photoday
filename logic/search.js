@@ -15,27 +15,11 @@ function showAlert(message) {
     }, 3000);
 }
 
-function displayResults(results) {
-    // Assuming results is an array of objects
-    console.log(results);
-    if (results.length === 0) {
-        showAlert('No results found');
-        return;
-    }
-    const resultsList = document.getElementById('resultsList');
-    resultsList.innerHTML = '';
-
-    // Show JSON response
-    const jsonContainer = document.createElement('pre');
-    jsonContainer.textContent = JSON.stringify(results, null, 2);
-    document.body.appendChild(jsonContainer);
-}
-
 function getCaptionFromSearch() {
     const captionQuery = document.getElementById('caption_search_input_field').value;
     document.getElementById('caption_search_input_field').value = '';
     if (userName !== undefined) {
-        fetch('http://localhost:3000/users/search_by_caption?name=${userName}&caption=${captionQuery}', {
+        fetch(`http://localhost:3000/users/search_by_caption?name=${userName}&caption=${captionQuery}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -43,8 +27,9 @@ function getCaptionFromSearch() {
         })
         .then(response => response.json())
         .then(data => {
-            window.location.href = 'http://127.0.0.1:5500/src/results.html'
-            displayResults(data);
+            const queryParams = new URLSearchParams();
+            queryParams.append('results', JSON.stringify(data));
+            window.location.href = `http://127.0.0.1:5500/src/results.html?${queryParams.toString()}`;
         })
         .catch(err => {
             console.log('Error searching by caption: ', err);
@@ -58,7 +43,7 @@ function getSleepFromSearch() {
     const sleepQuery = document.getElementById('sleep_search_input_field').value;
     document.getElementById('sleep_search_input_field').value = '';
     if (userName !== undefined) {
-        fetch('http://localhost:3000/users/search_by_sleep?name=${userName}&sleep=${sleepQuery}', {
+        fetch(`http://localhost:3000/users/search_by_sleep?name=${userName}&sleep=${sleepQuery}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -66,8 +51,9 @@ function getSleepFromSearch() {
         })
         .then(response => response.json())
         .then(data => {
-            window.location.href = 'http://127.0.0.1:5500/src/results.html'
-            displayResults(data);
+            const queryParams = new URLSearchParams();
+            queryParams.append('results', JSON.stringify(data));
+            window.location.href = `http://127.0.0.1:5500/src/results.html?${queryParams.toString()}`;
         })
         .catch(err => console.log('Error searching by sleep: ', err));
     } else {
@@ -79,7 +65,7 @@ function getMoodFromSearch() {
     const moodQuery = document.getElementById('mood_search_input_field').value;
     document.getElementById('mood_search_input_field').value = '';
     if (userName !== undefined) {
-        fetch('http://localhost:3000/users/search_by_mood?name=${userName}&mood=${moodQuery}', {
+        fetch(`http://localhost:3000/users/search_by_mood?name=${userName}&mood=${moodQuery}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -87,8 +73,9 @@ function getMoodFromSearch() {
         })
         .then(response => response.json())
         .then(data => {
-            window.location.href = 'http://127.0.0.1:5500/src/results.html'
-            displayResults(data);
+            const queryParams = new URLSearchParams();
+            queryParams.append('results', JSON.stringify(data));
+            window.location.href = `http://127.0.0.1:5500/src/results.html?${queryParams.toString()}`;
         })
         .catch(err => console.log('Error searching by mood: ', err));
     } else {
@@ -100,7 +87,7 @@ function getDateFromSearch() {
     const dateQuery = document.getElementById('date_search_input_field').value;
     document.getElementById('date_search_input_field').value = '';
     if (userName !== undefined) {
-        fetch('http://localhost:3000/users/search_by_date?name=${userName}&date=${dateQuery}', {
+        fetch(`http://localhost:3000/users/search_by_date?name=${userName}&date=${dateQuery}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -108,8 +95,9 @@ function getDateFromSearch() {
         })
         .then(response => response.json())
         .then(data => {
-            window.location.href = 'http://127.0.0.1:5500/src/results.html'
-            displayResults(data);
+            const queryParams = new URLSearchParams();
+            queryParams.append('results', JSON.stringify(data));
+            window.location.href = `http://127.0.0.1:5500/src/results.html?${queryParams.toString()}`;
         })
         .catch(err => console.log('Error searching by date: ', err));
     } else {

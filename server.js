@@ -40,7 +40,7 @@ app.get('/users', (req, res) => {
 
 app.get('/users/search_by_caption', async (req, res) => {
   const name = req.query.name;
-  const caption = req.query.caption;
+  const caption = `%${req.query.caption}%`;
   connection.query(
     'SELECT * FROM Entry WHERE UserID = ? AND PhotoID IN (SELECT PhotoID FROM Photo WHERE Caption LIKE ?)',
     [name, caption],
@@ -92,7 +92,7 @@ app.get('/users/search_by_mood', async (req, res) => {
 
 app.get('/users/search_by_date', async (req, res) => {
   const name = req.query.name;
-  const date = req.query.date;
+  const date = `%${req.query.date}%`;
   connection.query(
     'SELECT * FROM Entry WHERE UserID = ? AND Entry_Creation_Date LIKE ?',
     [name, date],
