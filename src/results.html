@@ -8,6 +8,12 @@
 <body>
     <div id="resultsList"></div>
     <!-- This is where the search results will be displayed -->
+    <button onclick="goBack()">Go Back</button>
     <script src="/logic/results.js"></script>
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
 </body>
 </html>

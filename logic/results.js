@@ -2,6 +2,9 @@ window.onload = function() {
     const urlParams = new URLSearchParams(window.location.search);
     const resultsJSON = JSON.parse(urlParams.get('results'));
 
+    const resultsList = document.getElementById('resultsList');
+    resultsList.innerHTML = '';
+
     resultsJSON.forEach(result => {
         const resultDiv = document.createElement('div');
         resultDiv.className = 'result';
