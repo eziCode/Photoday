@@ -273,14 +273,14 @@ app.post('/users/login', async (req, res) => {
 })
 
 app.post('/users/add_task', async (req, res) => {
-  if (userInfo === '') {
+  if (globalUserName === '') {
     return res.status(400).send('Need to login before adding tasks');
   }
   const task = req.body.task;
   const taskUUID = Math.floor(Math.random() * 2147483647);
   connection.query(
     'INSERT INTO Task (TaskID, TaskName, Status, Complete_By_Date, Details, UserID) VALUES (?, ?, ?, ?, ?, ?)',
-    [taskUUID, task, 0, "na", "na", userInfo["UserID"]],
+    [taskUUID, task, 0, "na", "na", globalUserName],
     (err, results) => {
       if (err) {
         console.log("Error occured while adding task: ", err);
@@ -291,6 +291,25 @@ app.post('/users/add_task', async (req, res) => {
     }
   );
 })
+
+app.post('/users/delete_task', async (req, res) => {
+  if (globalUserName.trim() === '') {
+    return res.status(400).send('Need to login before deleting tasks');
+  }
+  const task = req.body.task;
+  connection.query(
+    'DELETE FROM Task WHERE UserID = ? AND TaskName = ?',
+    [globalUserName, task],
+    (err, results) => {
+      if (err) {
+        console.log("Error occured while deleting task: ", err);
+        res.status(500).send('Error');
+      } else {
+        res.status(201).send('Success');
+      }
+    }
+  );
+});
 
 const PORT = process.env.PORT || 3000
 app.listen(PORT, () => {

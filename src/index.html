@@ -63,6 +63,7 @@
         function addTask() {
             var taskInput = document.getElementById("taskInput");
             var taskList = document.getElementById("taskList");
+            const message = taskInput.value;
 
             if (taskInput.value.trim() !== "") {
                 fetch('http://localhost:3000/users/add_task', {
@@ -89,6 +90,22 @@
                 deleteButton.onclick = function() {
                     taskList.removeChild(li);
                     // delete from sql
+                    fetch('http://localhost:3000/users/delete_task', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            task: message
+                        })
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            console.log("Task deleted successfully");
+                            return response.text();
+                        }
+                        throw new Error('Failed to delete task');
+                    })
                 };
                 li.appendChild(deleteButton);
                 taskList.appendChild(li);
