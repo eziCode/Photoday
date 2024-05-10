@@ -5,6 +5,7 @@ const cors = require('cors')
 const mysql = require('mysql2');
 
 const users = []
+var globalUserName = '';
 
 app.use(express.json())
 app.use(cors({
@@ -131,6 +132,7 @@ app.post('/users', async (req, res) => {
           return res.status(500).send('Error');
         }
         users.push(user);
+        globalUserName = req.body.username;
         res.status(201).send('Success');
       }
     );
@@ -260,13 +262,34 @@ app.post('/users/login', async (req, res) => {
   }
   try {
     if(await bcrypt.compare(req.body.password, user.password)) {
-      res.send('Success')
+      globalUserName = req.body.username;
+      res.send('Success');
     } else {
-      res.send('Not Allowed')
+      res.send('Not Allowed');
     }
   } catch {
-    res.status(500).send()
+    res.status(500).send();
   }
+})
+
+app.post('/users/add_task', async (req, res) => {
+  if (userInfo === '') {
+    return res.status(400).send('Need to login before adding tasks');
+  }
+  const task = req.body.task;
+  const taskUUID = Math.floor(Math.random() * 2147483647);
+  connection.query(
+    'INSERT INTO Task (TaskID, TaskName, Status, Complete_By_Date, Details, UserID) VALUES (?, ?, ?, ?, ?, ?)',
+    [taskUUID, task, 0, "na", "na", userInfo["UserID"]],
+    (err, results) => {
+      if (err) {
+        console.log("Error occured while adding task: ", err);
+        res.status(500).send('Error');
+      } else {
+        res.status(201).send('Success');
+      }
+    }
+  );
 })
 
 const PORT = process.env.PORT || 3000

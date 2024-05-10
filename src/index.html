@@ -6,6 +6,32 @@
     <title>Photoday</title>
     <link rel="stylesheet" href="/helper/style.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        /* CSS styles for the task bar */
+        .task-bar {
+            background-color: #ffffff;
+            width: 250px;
+            height: 100%;
+            position: fixed;
+            top: -100;
+            left: 0;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow-y: auto;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .task {
+            margin-bottom: 10px;
+            padding: 8px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .delete-btn {
+            cursor: pointer;
+            float: right;
+        }
+    </style>
 </head>
 <body>
     <nav>
@@ -26,7 +52,50 @@
         </ul>
     </nav>
     
-    <!-- Background image needed for home page -->
+    <div class="task-bar">
+        <h2>Tasks</h2>
+        <input type="text" id="taskInput" placeholder="Add a new task">
+        <button onclick="addTask()">Add Task</button>
+        <ul id="taskList"></ul>
+    </div>
+
+    <script>
+        function addTask() {
+            var taskInput = document.getElementById("taskInput");
+            var taskList = document.getElementById("taskList");
+
+            if (taskInput.value.trim() !== "") {
+                fetch('http://localhost:3000/users/add_task', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        task: taskInput.value
+                    })
+                })
+                .then(response => {
+                    if (response.ok) {
+                        return response.text();
+                    }
+                    throw new Error('Failed to add task');
+                })
+                var li = document.createElement("li");
+                li.textContent = taskInput.value;
+                var deleteButton = document.createElement("span");
+                deleteButton.textContent = "❌";
+                deleteButton.classList.add("delete-btn");
+
+                deleteButton.onclick = function() {
+                    taskList.removeChild(li);
+                    // delete from sql
+                };
+                li.appendChild(deleteButton);
+                taskList.appendChild(li);
+                taskInput.value = "";
+            }
+        }
+    </script>
 
     <script>
         function showSidebar() {
