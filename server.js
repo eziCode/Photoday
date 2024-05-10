@@ -42,14 +42,14 @@ app.get('/users/search_by_caption', async (req, res) => {
   const name = req.query.name;
   const caption = req.query.caption;
   connection.query(
-    'SELECT * FROM Entry WHERE UserID = ? AND PhotoID IN (SELECT PhotoID FROM Photo WHERE Caption = ?)',
+    'SELECT * FROM Entry WHERE UserID = ? AND PhotoID IN (SELECT PhotoID FROM Photo WHERE Caption LIKE ?)',
     [name, caption],
     (err, results) => {
       if (err) {
         console.log("Error occured while searching by caption: ", err);
         res.status(500).send('Error');
       } else {
-        res.status(201).send(results);
+        res.status(201).json(results);
       }
     }
   );
@@ -66,7 +66,7 @@ app.get('/users/search_by_sleep', async (req, res) => {
         console.log("Error occured while searching by sleep: ", err);
         res.status(500).send('Error');
       } else {
-        res.status(201).send(results);
+        res.status(201).json(results);
       }
     }
   );
@@ -83,7 +83,7 @@ app.get('/users/search_by_mood', async (req, res) => {
         console.log("Error occured while searching by mood: ", err);
         res.status(500).send('Error');
       } else {
-        res.status(201).send(results);
+        res.status(201).json(results);
       }
     }
   );
@@ -94,14 +94,14 @@ app.get('/users/search_by_date', async (req, res) => {
   const name = req.query.name;
   const date = req.query.date;
   connection.query(
-    'SELECT * FROM Entry WHERE UserID = ? AND Entry_Creation_Date = ?',
+    'SELECT * FROM Entry WHERE UserID = ? AND Entry_Creation_Date LIKE ?',
     [name, date],
     (err, results) => {
       if (err) {
         console.log("Error occured while searching by date: ", err);
         res.status(500).send('Error');
       } else {
-        res.status(201).send(results);
+        res.status(201).json(results);
       }
     }
   );
