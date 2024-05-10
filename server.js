@@ -3,10 +3,13 @@ const app = express()
 const bcrypt = require('bcrypt')
 const cors = require('cors')
 const mysql = require('mysql2');
+const bodyParser = require('body-parser');
 
 const users = []
 var globalUserName = '';
 
+app.use(bodyParser.json({ limit: '50mb' }))
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true}))
 app.use(express.json())
 app.use(cors({
   origin: 'http://127.0.0.1:5500'
@@ -61,7 +64,7 @@ app.get('/users/search_by_caption', async (req, res) => {
   const name = req.query.name;
   const caption = `%${req.query.caption}%`;
   connection.query(
-    'SELECT * FROM Entry WHERE UserID = ? AND PhotoID IN (SELECT PhotoID FROM Photo WHERE Caption LIKE ?)',
+    'SELECT * FROM Entry e JOIN Photo p ON (e.PhotoID = p.PhotoID) WHERE e.UserID = ? AND p.Caption LIKE ?',
     [name, caption],
     (err, results) => {
       if (err) {
@@ -203,8 +206,8 @@ app.post('/users/insert_entry', async (req, res) => {
           res.status(500).send('Error on emotion insert');
         } else {
           connection.query(
-            'INSERT INTO Photo (PhotoID, Photo_Creation_Date, Caption, Reference_URL) VALUES (?, ?, ?, ?)',
-            [photoUUID, new Date(), photo_caption, photo_data, entryUUID],
+            'INSERT INTO Photo (PhotoID, Photo_Creation_Date, Caption, Reference_URL, Photo_Data) VALUES (?, ?, ?, ?, ?)',
+            [photoUUID, new Date(), photo_caption, photo_data, req.body.entry.photo.photo_information],
             (err, results) => {
               if (err) {
                 console.log("Error occured while inserting photo: ", err);

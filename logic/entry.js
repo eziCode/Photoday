@@ -91,10 +91,10 @@ let user_name = '';
 function capturePhoto() {
     const canvas = document.createElement('canvas');
     const context = canvas.getContext('2d');
-    canvas.width = video.videoWidth / 2;
-    canvas.height = video.videoHeight / 2;
+    canvas.width = video.videoWidth / 50;
+    canvas.height = video.videoHeight / 50;
     context.drawImage(video, 0, 0, canvas.width, canvas.height);
-    const photoData = canvas.toDataURL('image/png', 0.5);
+    const photoData = canvas.toDataURL('image/png', 1);
     photo.photo = photoData;
 }
 
@@ -155,6 +155,7 @@ function submitEntry() {
             },
             photo: {
                 photo: "reference_url_placeholder", // need to figure out how to store the photo
+                photo_information: photo._photo,
                 caption: photo._caption
             }
         }

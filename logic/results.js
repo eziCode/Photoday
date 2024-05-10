@@ -13,6 +13,18 @@ window.onload = function() {
         resultText.innerText = `Entry ID: ${result.EntryID}, User ID: ${result.UserID}, Emotion ID: ${result.EmotionID}, Sleep Amount: ${result.Sleep_Amount}, Entry Creation Date: ${result.Entry_Creation_Date}, Entry Text: ${result.Entry_Text}`;
         resultDiv.appendChild(resultText);
 
+        // Create an image element
+        const imageElement = document.createElement('img');
+
+        const bytes = result.Photo_Data.data;
+        const binary = String.fromCharCode.apply(null, bytes);
+
+        imageElement.src = binary;
+
+        imageElement.style.width = '200px';
+        imageElement.style.height = '200px';
+        resultDiv.appendChild(imageElement);
+
         document.getElementById('resultsList').appendChild(resultDiv);
     });
 }
